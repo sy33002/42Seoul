@@ -8,24 +8,57 @@ char    *ft_get_buf(int fd,char *s_buf,char *buf)
     //버퍼만큼 읽고 담는다.c
     char    *get_buf;//get_buf:문자열을 담는다.
     int     size;
-
+    char    *tmp;
     size = 1;
     while (size)
     {
-        printf("%s\n", "aaaa");
         size = read(fd, buf, BUFFER_SIZE);// read(fd, 담을 buf, 얼마나 담을것인지)
-        printf("%s", buf);
-        // if (size <= 0)
-        //     break;
+        // printf("%s", buf);
+        if (size <= 0)
+            break;
+        buf[size] = '\0';
+        if (!s_buf)
+		{
+		    s_buf = malloc(1);
+		    s_buf[0] = '\0';
+		}
+        tmp = s_buf;
+        s_buf = ft_strjoin(tmp, buf);
+        // printf("%s",s_buf);
+        if (ft_strchr(s_buf, '\n') != NULL)
+            break ;
+        free(tmp);
     }
-    return (buf);
+    return (s_buf);
 }
-    
-    
-    //tmp_buf = s_buf
-    //s_buf = tmp_buf + buf;
-    //개행을 찾아 ft_strchr으로 찾았다면 break시켜야대
-    //tmp_buf 댕글링 포인터 해제
+
+char  *ft_buf_cut(char  *str)
+{
+    char    *temp;
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    while (str[i])
+    {
+        if (str[i] == '\n')
+            break ;
+        i++;
+    }
+    temp = (char *)malloc(ft_strlen(str) - i);
+    if (!temp)
+        return NULL;
+    int k = i;
+    while (str[i])
+        temp[j++] = str[i++];
+    // temp = ft_substr(str, i, ft_strlen(str)-i);
+    str[k] = '\0';
+    // printf("%d\n", k);
+    temp[j] = '\0';
+    // printf("%d\n", j);
+    return (temp);
+}
 
 
 char *get_next_line(int fd)
@@ -35,11 +68,11 @@ char *get_next_line(int fd)
     char    *buf;
     char    *tmp;
 
-    // if (BUFFER_SIZE < 0 || fd < 0)
-    //     return NULL;
+    if (BUFFER_SIZE < 0 || fd < 0)
+        return NULL;
     buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-    printf("%s", "her");
     tmp = ft_get_buf(fd, s_buf, buf);
+    s_buf = ft_buf_cut(tmp);
     return (tmp);
 }
 
@@ -48,11 +81,12 @@ int main()
   int fd;
 
   fd = 1;
-  fd = open("./test", O_RDONLY);
-  printf("%d",fd);
+  fd = open("./text", O_RDONLY);
   char *line = get_next_line(fd);
-//   printf("%p\n", line);
-//   printf("%s", get_next_line(fd));
+  printf("%s", line);
   free(line);
+//     line = get_next_line(fd);
+//   printf("%s", line);
+//   free(line);
   close(fd);
 }
