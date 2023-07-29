@@ -59,42 +59,42 @@ char	*ft_strchr(char *s, int c)
 	return (NULL);
 }
 
-int	ft_len(char *src, unsigned int idx, int len)
-{
-	int	size;
-	int	start;
+// int	ft_len(char *src, unsigned int idx, int len)
+// {
+// 	int	size;
+// 	int	start;
 
-	start = idx;
-	size = ft_strlen(src) - idx + 1;
-	if (size < len)
-		return (size);
-	else
-		return (len);
-}
+// 	start = idx;
+// 	size = ft_strlen(src) - idx + 1;
+// 	if (size < len)
+// 		return (size);
+// 	else
+// 		return (len);
+// }
 
-char	*ft_substr(char *s, int start, int len)
-{
-	int	i;
-	int	length;
-	char	*cpy;
+// char	*ft_substr(char *s, int start, int len)
+// {
+// 	int	i;
+// 	int	length;
+// 	char	*cpy;
 
-	i = 0;
-	if (!s)
-		return (NULL);
-	if ((int)start >= ft_strlen(s))
-	{
-		cpy = malloc(1);
-		if (!cpy)
-			return (NULL);
-		cpy[0] = '\0';
-		return (cpy);
-	}
-	length = ft_len(s, start, len);
-	cpy = (char *)malloc(sizeof(char) * (length + 1));
-	if (!cpy)
-		return (NULL);
-	while (i < length)
-		cpy[i++] = s[start++];
-	cpy[i] = '\0';
-	return (cpy);
-}
+// 	i = 0;
+// 	if (!s)
+// 		return (NULL);
+// 	if ((int)start >= ft_strlen(s))
+// 	{
+// 		cpy = malloc(1);
+// 		if (!cpy)
+// 			return (NULL);
+// 		cpy[0] = '\0';
+// 		return (cpy);
+// 	}
+// 	length = ft_len(s, start, len);
+// 	cpy = (char *)malloc(sizeof(char) * (length + 1));
+// 	if (!cpy)
+// 		return (NULL);
+// 	while (i < length)
+// 		cpy[i++] = s[start++];
+// 	cpy[i] = '\0';
+// 	return (cpy);
+// }

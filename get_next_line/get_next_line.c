@@ -5,8 +5,7 @@
 
 char    *ft_get_buf(int fd,char *s_buf,char *buf)
 {
-    //버퍼만큼 읽고 담는다.c
-    char    *get_buf;//get_buf:문자열을 담는다.
+    //버퍼만큼 읽고 담는다.
     int     size;
     char    *tmp;
     size = 1;
@@ -14,8 +13,10 @@ char    *ft_get_buf(int fd,char *s_buf,char *buf)
     {
         size = read(fd, buf, BUFFER_SIZE);// read(fd, 담을 buf, 얼마나 담을것인지)
         // printf("%s", buf);
-        if (size <= 0)
+        if (size == 0)
             break;
+        else if (size == -1)
+            return 0;
         buf[size] = '\0';
         if (!s_buf)
 		{
@@ -24,10 +25,11 @@ char    *ft_get_buf(int fd,char *s_buf,char *buf)
 		}
         tmp = s_buf;
         s_buf = ft_strjoin(tmp, buf);
-        // printf("%s",s_buf);
+        if (!s_buf)
+            return NULL;
+        free(tmp);
         if (ft_strchr(s_buf, '\n') != NULL)
             break ;
-        free(tmp);
     }
     return (s_buf);
 }
@@ -71,11 +73,15 @@ char *get_next_line(int fd)
     if (BUFFER_SIZE < 0 || fd < 0)
         return NULL;
     buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+    if (!buf)
+        return NULL;
     tmp = ft_get_buf(fd, s_buf, buf);
     s_buf = ft_buf_cut(tmp);
+    free(buf);
     return (tmp);
 }
 
+#include <string.h>
 int main()
 {
   int fd;
@@ -88,5 +94,6 @@ int main()
 //     line = get_next_line(fd);
 //   printf("%s", line);
 //   free(line);
+    // system("leaks a.exe");
   close(fd);
 }
