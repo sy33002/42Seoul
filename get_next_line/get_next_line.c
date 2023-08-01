@@ -1,99 +1,120 @@
-// 함수 호출 시 read로 BUFFER_SIZE만큼 파일을 읽어서
-//buf에 담게 되면, 중간에 '\n'을 만나거나 파일이 끝나면
-//그 포인트를 s_buf에 담아주고 그 s_buf부터 또 읽기 시작
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jihyuki2 <jihyuki2@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/27 15:57:19 by jihyuki2          #+#    #+#             */
+/*   Updated: 2023/08/01 19:00:55 by jihyuki2         ###   ########seoul.kr  */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-char    *ft_get_buf(int fd,char *s_buf,char *buf)
+static void	free2(char *str)
 {
-    //버퍼만큼 읽고 담는다.
-    int     size;
-    char    *tmp;
-    size = 1;
-    while (size)
-    {
-        size = read(fd, buf, BUFFER_SIZE);// read(fd, 담을 buf, 얼마나 담을것인지)
-        // printf("%s", buf);
-        if (size == 0)
-            break;
-        else if (size == -1)
-            return 0;
-        buf[size] = '\0';
-        if (!s_buf)
+	free(str);
+	str = NULL;
+}
+
+char	*ft_get_buf(int size, int fd, char *s_buf, char *buf)
+{
+	char	*tmp;
+	
+	while (size)
+	{
+		size = read(fd, buf, BUFFER_SIZE);
+		if (size == 0)
+			break ;
+		else if (size == -1)
+			return (NULL);
+		buf[size] = '\0';
+		if (!s_buf)
 		{
-		    s_buf = malloc(1);
-		    s_buf[0] = '\0';
+			s_buf = malloc(1);
+			s_buf[0] = '\0';
 		}
-        tmp = s_buf;
-        s_buf = ft_strjoin(tmp, buf);
-        if (!s_buf)
-            return NULL;
-        free(tmp);
-        if (ft_strchr(s_buf, '\n') != NULL)
-            break ;
-    }
-    return (s_buf);
+		tmp = s_buf;
+		s_buf = ft_strjoin(tmp, buf);
+		if (!s_buf)
+			return (NULL);
+		free2(tmp);
+		if (ft_strchr(s_buf, '\n'))
+			break ;
+	}
+	return (s_buf);
 }
 
-char  *ft_buf_cut(char  *str)
+static char	*ft_buf_cut(char *str)
 {
-    char    *temp;
-    int i;
-    int j;
+	char	*temp;
+	int		i;
+	int		j;
+	int		k;
 
-    i = 0;
-    j = 0;
-    while (str[i])
-    {
-        if (str[i] == '\n')
-            break ;
-        i++;
-    }
-    temp = (char *)malloc(ft_strlen(str) - i);
-    if (!temp)
-        return NULL;
-    int k = i;
-    while (str[i])
-        temp[j++] = str[i++];
-    // temp = ft_substr(str, i, ft_strlen(str)-i);
-    str[k] = '\0';
-    // printf("%d\n", k);
-    temp[j] = '\0';
-    // printf("%d\n", j);
-    return (temp);
+	i = 0;
+	j = 0;
+	while (!(str[i] == '\0' || str[i] == '\n'))
+		i++;
+	k = i;
+	temp = ft_substr(str, i + 1, ft_strlen(str) - i);
+	if (!temp)
+		return (NULL);
+	if (temp[0] == '\0')
+	{
+		free2(temp);
+		return (NULL);
+	}
+	// temp[i] = '\0';
+	return (temp);
 }
 
-
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-    int i;
-    static char    *s_buf;
-    char    *buf;
-    char    *tmp;
+	static char	*s_buf;
+	char		*buf;
+	char		*tmp;
+	int			size;
 
-    if (BUFFER_SIZE < 0 || fd < 0)
-        return NULL;
-    buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-    if (!buf)
-        return NULL;
-    tmp = ft_get_buf(fd, s_buf, buf);
-    s_buf = ft_buf_cut(tmp);
-    free(buf);
-    return (tmp);
+	if (BUFFER_SIZE < 1 || fd < 0)
+		return (NULL);
+	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buf)
+		return (NULL);
+	size = 1;
+	// printf("%p\n", )
+	tmp = ft_get_buf(size, fd, s_buf, buf);
+	if (!tmp)
+	{
+		free2(tmp);
+		return (NULL);
+	}
+	s_buf = ft_buf_cut(tmp);
+	free(buf);
+	return (tmp);
 }
 
-#include <string.h>
-int main()
-{
-  int fd;
+// #include <fcntl.h>
+// #include <stdio.h>
+// #include <stdlib.h>
 
-  fd = 1;
-  fd = open("./text", O_RDONLY);
-  char *line = get_next_line(fd);
-  printf("%s", line);
-  free(line);
-//     line = get_next_line(fd);
+// int main(void)
+// {
+//   int fd;
+
+//   fd = 1;
+//   fd = open("./text", O_RDONLY);
+//   char *line = get_next_line(fd);
+//   printf("%s\n", "----answer---");
+//   printf("%p\n", line);
 //   printf("%s", line);
 //   free(line);
-    // system("leaks a.exe");
-  close(fd);
-}
+//   //line = get_next_line(fd);
+//   //printf("%s", line);
+//   //free(line);
+//   //line = get_next_line(fd);
+//   //printf("%s", line);
+//   //free(line);
+//   return (0);
+// }
