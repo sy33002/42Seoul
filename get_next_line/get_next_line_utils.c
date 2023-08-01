@@ -6,32 +6,30 @@
 /*   By: jihyuki2 <jihyuki2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:57:30 by jihyuki2          #+#    #+#             */
-/*   Updated: 2023/08/01 18:50:13 by jihyuki2         ###   ########seoul.kr  */
+/*   Updated: 2023/08/01 20:36:52 by jihyuki2         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(char *str)
+unsigned int	ft_strlen(char *str)
 {
 	int	i;
 
+	i = 0;
 	if (!str)
 		return (0);
-	i = 0;
 	while (str[i])
-	{
 		i++;
-	}
 	return (i);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	int		s1_len;
-	int		s2_len;
-	char	*tmp;
-	int		i;
+	unsigned int		s1_len;
+	unsigned int		s2_len;
+	char				*tmp;
+	int					i;
 
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
@@ -73,14 +71,14 @@ char	*ft_strchr(char *s, int c)
 
 char	*ft_substr(char *s, int start, int len)
 {
-	int	l;
-	int	i;
+	int		l;
+	int		i;
 	char	*res;
 
 	i = 0;
 	if (!s)
 		return (NULL);
-	if ((int)start >= ft_strlen(s))
+	if ((unsigned int)start >= ft_strlen(s))
 	{
 		res = malloc(1);
 		res[0] = 0;
