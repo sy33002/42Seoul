@@ -6,7 +6,7 @@
 /*   By: jihyuki2 <jihyuki2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:57:19 by jihyuki2          #+#    #+#             */
-/*   Updated: 2023/08/03 15:09:17 by jihyuki2         ###   ########seoul.kr  */
+/*   Updated: 2023/08/03 15:28:21 by jihyuki2         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,10 @@ static char	*ft_get_buf(int size, int fd, char *s_buf, char *buf)
 	while (size != 0)
 	{
 		size = read(fd, buf, BUFFER_SIZE);
-		
 		if (size == -1)
 		{
-			free2(s_buf);
-			return (NULL);
+			if (!s_buf)
+				free2(s_buf);
 		}
 		if (size == 0)
 			break ;
@@ -92,7 +91,10 @@ char	*get_next_line(int fd)
 	if (read(fd, NULL, 0) < 0)
 	{
 		if (!s_buf)
-		free (s_buf);
+		{
+			free2(s_buf);
+			return (s_buf);
+		}
 	}
 	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buf)
