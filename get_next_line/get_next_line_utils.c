@@ -6,7 +6,7 @@
 /*   By: jihyuki2 <jihyuki2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:57:30 by jihyuki2          #+#    #+#             */
-/*   Updated: 2023/08/03 14:45:49 by jihyuki2         ###   ########seoul.kr  */
+/*   Updated: 2023/08/06 14:53:03 by jihyuki2         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,13 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (tmp);
 }
 
-char	*ft_strchr(char *s, int c)
+char	*ft_strchr(char *str, int c)
 {
-	int				i;
-	unsigned char	f;
-	char			*str;
+	int		i;
+	char	f;
 
 	i = 0;
-	f = (unsigned char)c;
-	str = (char *)s;
+	f = (char)c;
 	while (str[i])
 	{
 		if (f == str[i])

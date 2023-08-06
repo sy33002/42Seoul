@@ -6,7 +6,7 @@
 /*   By: jihyuki2 <jihyuki2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:57:19 by jihyuki2          #+#    #+#             */
-/*   Updated: 2023/08/06 13:40:17 by jihyuki2         ###   ########seoul.kr  */
+/*   Updated: 2023/08/06 16:34:50 by jihyuki2         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,11 @@ static char	*ft_get_buf(int size, int fd, char *s_buf, char *buf)
 		size = read(fd, buf, BUFFER_SIZE);
 		if (size == -1)
 		{
-			// free2(s_buf);
+			free2(s_buf);
 			return (NULL);
 		}
-		if (size == 0){
+		if (size == 0)
 			break ;
-		}
 		buf[size] = '\0';
 		s_buf = put_null(s_buf);
 		tmp = s_buf;
@@ -87,45 +86,16 @@ char	*get_next_line(int fd)
 	int				i;
 
 	i = 1;
-	if (read(fd, NULL, 0) < 0)
-	{
-		if (!s_buf)
-		{
-			free2(s_buf);
-			return (NULL);
-		}
-	}
 	if (BUFFER_SIZE < 1 || fd < 0)
 		return (NULL);
 	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buf)
 		return (NULL);
 	str = ft_get_buf(i, fd, s_buf, buf);
+	s_buf = NULL;
 	free2(buf);
 	if (str == NULL)
 		return (NULL);
 	s_buf = ft_buf_complete(str);
 	return (str);
 }
-
-// #include <fcntl.h>
-// #include <stdio.h>
-
-// int main(void)
-// {
-//   int fd;
-
-//   fd = 1;
-//   fd = open("./read_error.txt", O_RDONLY);
-//   char *line = get_next_line(fd);
-//   printf("%p\n", line);
-//   printf("%s", get_next_line(fd));
-//   free(line);
-//   //line = get_next_line(fd);
-//   //printf("%s", line);
-//   //free(line);
-//   //line = get_next_line(fd);
-//   //printf("%s", line);
-//   //free(line);
-//   return (0);
-// }
