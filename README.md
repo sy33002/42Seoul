@@ -8,3 +8,4 @@
 3. ft_printf
 4. born2beroot
 5. minitalk
+6. solong
