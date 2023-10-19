@@ -6,7 +6,7 @@
 #    By: jihyuki2 <jihyuki2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/14 15:37:56 by jihyuki2          #+#    #+#              #
-#    Updated: 2023/10/15 20:44:18 by jihyuki2         ###   ########.fr        #
+#    Updated: 2023/10/19 19:51:04 by jihyuki2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,18 @@ LIBFT		= libft
 LIBFT_LIB	= libft.a
 
 SRCS		=	push_swap.c \
-					./src/inputParsing.c \
 					./src/aboutArray.c \
+					./src/bigSort.c \
+					./src/inputParsing.c \
+					./src/listAdd.c \
+					./src/listRemove.c \
+					./src/littleSort.c \
+					./src/new.c \
+					./src/rr.c \
+					./src/rrr.c \
+					./src/ss.c \
 					./src/utils.c \
+					./src/utils2.c \
 
 			
 OBJS		= $(SRCS:%.c=%.o)
