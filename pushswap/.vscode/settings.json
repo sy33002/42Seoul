@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.ejs": "html",
+        "push_swap.h": "c",
+        "*.ds_store": "c"
+    }
+}

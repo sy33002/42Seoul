@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	listAddFrontA(t_info *info, int value)
 {
@@ -40,7 +40,7 @@ void	listAddFrontB(t_info *info, int value)
 	new_node = newNode();
 	if (info->b_size == 0)
 	{
-		info->b_top = newNode();
+		info->b_top = new_node;
 		info->b_head->next = info->b_top;
 		info->b_top->num = value;
 	}

@@ -10,14 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	rra(t_info *info)
 {
-	while (info->a_top)
+	t_num	*tmp;
+
+	tmp = info->a_top;
+	while (tmp != NULL)
 	{
-		info->a_bottom_num = info->a_top->num;
-		info->a_top = info->a_top->next;
+		info->a_bottom_num = tmp->num;
+		tmp = tmp->next;
 	}
 	if (info->a_size == 1)
 		return ;
@@ -31,12 +34,16 @@ void	rra(t_info *info)
 	}
 }
 
+
 void	rrb(t_info *info)
 {
-	while (info->b_top)
+	t_num	*tmp;
+
+	tmp = info->b_top;
+	while (tmp != NULL)
 	{
-		info->b_bottom_num = info->b_top->num;
-		info->b_top = info->b_top->next;
+		info->b_bottom_num = tmp->num;
+		tmp = tmp->next;
 	}
 	if (info->b_size == 1)
 		return ;
@@ -49,3 +56,11 @@ void	rrb(t_info *info)
 		ft_putstr("rra\n");
 	}
 }
+
+
+// void	rrr(t_info *info)
+// {
+// 	rra(info);
+// 	rrb(info);
+// 	ft_putstr("rrr\n");
+// }

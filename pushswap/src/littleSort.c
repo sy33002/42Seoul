@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	littleSort(t_info *info)
 {
@@ -34,30 +34,31 @@ void	littleSort(t_info *info)
 
 void	threeSort(t_info *info)
 {
-	int	top;
-	int	mid;
-	int	bot;
+	int	t;
+	int	m;
+	int	b;
 
-	top = info->a_top->num;
-	mid = info->a_top->next->num;
-	while (info->a_top != NULL) 
+	t = info->a_top->num;
+	m = info->a_top->next->num;
+	b = info->a_top->next->next->num;	
+	if (t < m && t < b && m > b && m > t && b > t && b < m)
 	{
-        info->a_bottom_num = info->a_top->num;
-        info->a_top = info->a_top->next;
-	}
-	bot = info->a_bottom_num;
-	if (top < mid && top > bot)
-		rra(info);
-	if (mid < top && top < bot)
 		sa(info);
-	if (mid < top && mid < bot && bot < top)
 		ra(info);
-	if (mid < top && bot < top && bot < mid)
+	}
+	if (t > m && t < b && m < t && m < b && b > t && b > m)
+		sa(info);
+	if (t < m && t > b && m > t && m > b && b < m && b < t)
+		rra(info);
+	if (t > m && t > b && m < t && m < b && b > m && b < t)
+		ra(info);
+	if (t > m && t > b && m < t && m > b && b < t && b < m)
 	{
 		sa(info);
 		rra(info);
 	}
 }
+
 
 int	findIndex(t_info *info, int find)
 {

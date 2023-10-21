@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	ra(t_info *info)
 {
@@ -40,9 +40,9 @@ void	rb(t_info *info)
 	else
 	{
 		b_num = info->b_top->num;
-		listAddBackA(info, &info->b_top, b_num);
-		listRemoveFrontA(info);
-		ft_putstr("ra\n");
+		listAddBackB(info, &info->b_top, b_num);
+		listRemoveFrontB(info);
+		ft_putstr("rb\n");
 	}
 }
 

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	isInteger(char **av)
 {
@@ -47,8 +47,6 @@ void	isSorted(int *nums, int size)
 			cnt++;
 		i++;
 	}
-	printf("cnt : %d\n", cnt);
-	printf("size : %d\n", size);
 	if (cnt + 1 == size)
 	{
 		free(nums);
@@ -62,16 +60,20 @@ void	hasDuplicates(int *nums, int size)
 	int	j;
 
 	i = 0;
+	if (size == 2 && nums[0] == nums[1])
+	{
+		free(nums);
+		errorMsg();
+	}
 	while  (i < size)
 	{
 		j = i + 1;
-		while (j < size - 1)
+		while (j < size)
 		{
 			if (nums[i] == nums[j])
 			{
 				free(nums);
 				errorMsg();
-				return ;
 			}
 			j++;
 		}
@@ -85,18 +87,10 @@ int	*	inputParsing(char **av, int *arr_size, int *nums)
 
 	size = 0;
 	isInteger(av);
-	printf("1-0\n");
 	*arr_size = arraySize(av);
-	printf("arrsize: %d\n", *arr_size);
-	printf("1-1\n");
+	size = *arr_size;
 	nums = numArray(av, size);
-	for (int i = 0; i < size; i++){
-		printf("nums[i] : %d\n", nums[i]);
-	}
-	printf("1-2\n");
 	isSorted(nums, size);
-	printf("1-3\n");
 	hasDuplicates(nums, size);
-	printf("1-4\n");
 	return (nums);
 }
