@@ -6,7 +6,7 @@
 /*   By: jihyuki2 <jihyuki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 15:39:03 by jihyuki2          #+#    #+#             */
-/*   Updated: 2023/10/25 22:34:21 by jihyuki2         ###   ########.fr       */
+/*   Updated: 2023/11/03 21:25:19 by jihyuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		array_size(char **av);
 int		*av_to_nums(char **av, int size);
 void	bigger_sort(t_info *info);
 void	rotate_to_max(t_info *info, int *c);
-void	bring_max_top(t_info *info);
+void	find_max_top(t_info *info);
 void	move_a_to_b(t_info *info, int chunk);
 void	validate_int(char **av);
 void	is_sorted(int *nums, int size);
@@ -60,7 +60,6 @@ void	little_sort(t_info *info);
 void	three_sort(t_info *info);
 int		find_index(t_info *info, int find);
 void	four_sort(t_info *info);
-void	if_case_two(t_info *info, int a_b, int sort);
 void	five_sort(t_info *info);
 t_num	*new_stack(void);
 t_num	*new_node(void);
@@ -84,7 +83,8 @@ void	array_to_index(t_info *info, int *nums, int arr_size);
 void	ft_putstr(char *str);
 void	bubble_sort(int *arr, int size);
 void	stack_free(t_num **stack);
-void quickSort(int arr[], int low, int high);
-int partition(int arr[], int low, int high);
+void	check_all_space(char **av);
+int		ft_atoi2(const char *str);
+int		checkss(int minor, long long res, const char *str, int i);
 
 #endif

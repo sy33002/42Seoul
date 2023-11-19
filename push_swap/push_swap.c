@@ -6,7 +6,7 @@
 /*   By: jihyuki2 <jihyuki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 15:37:14 by jihyuki2          #+#    #+#             */
-/*   Updated: 2023/10/25 22:34:04 by jihyuki2         ###   ########.fr       */
+/*   Updated: 2023/11/03 21:05:54 by jihyuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	main(int ac, char **av)
 
 	nums = NULL;
 	if (ac < 2)
-		error();
+		exit(1);
+	check_all_space(av);
 	info = new_info();
 	nums = input_parsing(av, &arr_size, nums);
 	make_info_array(info, nums, arr_size);

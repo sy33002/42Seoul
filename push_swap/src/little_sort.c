@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   littleSort.c                                       :+:      :+:    :+:   */
+/*   little_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jihyuki2 <jihyuki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 21:17:16 by jihyuki2          #+#    #+#             */
-/*   Updated: 2023/10/25 22:22:08 by jihyuki2         ###   ########.fr       */
+/*   Updated: 2023/10/26 16:54:14 by jihyuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,15 @@ void	four_sort(t_info *info)
 	pa(info, "pa\n");
 }
 
-void	if_case_two(t_info *info, int a_b, int sort)
+void	if_case_two(t_info *info, int ab, int sort)
 {
 	if (sort == 1)
 	{
 		if (info->b_top->num > info->b_top->next->num)
 		{
-			if (a_b == 0)
+			if (ab == 0)
 				sa(info, "sa\n");
-			else if (a_b == 1)
+			else if (ab == 1)
 				sb(info, "sb\n");
 		}
 	}
@@ -104,15 +104,15 @@ void	if_case_two(t_info *info, int a_b, int sort)
 	{
 		if (info->b_top->num < info->b_top->next->num)
 		{
-			if (a_b == 0)
+			if (ab == 0)
 				sa(info, "sa\n");
-			else if (a_b == 1)
+			else if (ab == 1)
 				sb(info, "sb\n");
 		}
 	}
 }
 
-void	five_sort(t_info	*info)
+void	five_sort(t_info *info)
 {
 	while (info->a_size > 3)
 	{
@@ -124,7 +124,17 @@ void	five_sort(t_info	*info)
 			ra(info, "ra\n");
 	}
 	sb(info, "sb\n");
-	if_case_two(info, 1, 0);
+	if (info->a_top->num > info->a_top->next->num)
+	{
+		if (info->b_top->num > info->b_top->next->num)
+		{
+			sa(info, "sa\n");
+		}
+		else
+		{
+			sb(info, "sb\n");
+		}
+	}
 	three_sort(info);
 	pa(info, "pa\n");
 	pa(info, "pa\n");

@@ -6,65 +6,67 @@
 /*   By: jihyuki2 <jihyuki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 19:10:21 by jihyuki2          #+#    #+#             */
-/*   Updated: 2023/10/19 19:27:01 by jihyuki2         ###   ########.fr       */
+/*   Updated: 2023/10/26 16:36:03 by jihyuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "push_swap.h"
 
-void	bigSort(t_info *info)
+void	bigger_sort(t_info *info)
 {
-	int chunk;
+	double	chunk;
 
 	chunk = 0.00000053 * info->a_size
 		* info->a_size + 0.03 * info->a_size + 14.5;
-	a_to_b(info,chunk);
-	b_to_a(info);
-}
-
-void	max_top_utils(t_info *info, int *i)
-{
-	if ((int)(info->b_size / 2) < *i)
+	move_a_to_b(info, chunk);
+	while (info->b_size != 0)
 	{
-		while (*i < info->b_size)
-		{
-			rrb(info);
-			(*i)++;
-		}
-		return ;
-	}
-	else
-	{
-		while (*i > 0)
-		{
-			rb(info);
-			(*i)--;
-		}
-		return ;
+		find_max_top(info);
+		pa(info, "pa\n");
 	}
 }
 
-void	max_top(t_info *info)
+void	find_max_top(t_info *info)
 {
 	t_num	*node;
 	int		max;
-	int		i;
+	int		c;
 
-	i = 0;
+	c = 0;
 	max = info->b_size - 1;
 	node = info->b_top;
 	while (node != NULL)
 	{
 		if (node->num == max)
-		{
-			max_top_utils(info, &i);
-		}
+			rotate_to_max(info, &c);
+		c++;
 		node = node->next;
-		i++;
 	}
 }
 
-void	a_to_b(t_info *info, int chunk)
+void	rotate_to_max(t_info *info, int *c)
+{
+	if ((int)(info->b_size / 2) < *c)
+	{
+		while (*c < info->b_size)
+		{
+			rrb(info, "rrb\n");
+			(*c)++;
+		}
+		return ;
+	}
+	else
+	{
+		while (*c > 0)
+		{
+			rb(info, "rb\n");
+			(*c)--;
+		}
+		return ;
+	}
+}
+
+void	move_a_to_b(t_info *info, int chunk)
 {
 	int	i;
 
@@ -73,30 +75,21 @@ void	a_to_b(t_info *info, int chunk)
 	{
 		if (info->a_top->num <= i)
 		{
-			pb(info);
+			pb(info, "pb\n");
 			i++;
 		}
 		else if (info->a_top->num > i && info->a_top->num <= i + chunk)
 		{
-			pb(info);
-			rb(info);
+			pb(info, "pb\n");
+			rb(info, "rb\n");
 			i++;
 		}
 		else if (info->a_top->num > (i + chunk))
 		{
 			if (i < info->a_size / 2 && i >= 0)
-				rra(info);
+				rra(info, "rra\n");
 			else
-				ra(info);
+				ra(info, "ra\n");
 		}
-	}
-}
-
-void	b_to_a(t_info *info)
-{
-	while (info->b_size != 0)
-	{
-		max_top(info);
-		pa(info);
 	}
 }
