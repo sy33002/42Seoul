@@ -6,7 +6,7 @@
 /*   By: jihyuki2 <jihyuki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 18:30:31 by jihyuki2          #+#    #+#             */
-/*   Updated: 2023/11/26 15:59:07 by jihyuki2         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:05:02 by jihyuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,16 @@ int	red_btn(t_game_info *game)
 	return (1);
 }
 
+void	check_leak(void)
+{
+	system("leaks a.out");
+}
+
 int	main(int ac, char **av)
 {
 	t_game_info	game;
 
+	atexit(check_leak);
 	if (ac == 2)
 	{
 		struct_init(&game);
@@ -96,5 +102,6 @@ int	main(int ac, char **av)
 	}
 	else
 		err_msg("argument is not 2");
+	atexit(check_leak);
 	return (0);
 }

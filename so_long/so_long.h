@@ -6,7 +6,7 @@
 /*   By: jihyuki2 <jihyuki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 18:30:51 by jihyuki2          #+#    #+#             */
-/*   Updated: 2023/11/26 15:58:38 by jihyuki2         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:02:01 by jihyuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void		move_key_a(t_game_info *game);
 void		move_key_d(t_game_info *game);
 void		print_map(char **line);
 char		*ft_strdup2(const char *s1);
+int	check_path(t_game_info *vars, char **map, int x, int y,int *info);
 t_images	img_init(void *mlx);
+void	free_table(char **table);
 
 #endif
