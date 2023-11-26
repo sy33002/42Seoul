@@ -6,7 +6,7 @@
 /*   By: jihyuki2 <jihyuki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 18:48:05 by jihyuki2          #+#    #+#             */
-/*   Updated: 2023/11/26 19:03:07 by jihyuki2         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:09:32 by jihyuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	check_param(t_game_info *game)
 		{
 			c = game->str_line[i][j];
 			if (!(c == 'P' || c == '0' || c == '1' || c == 'C' || c == 'E' ))
-				err_free_exit("param error", game);
+				err_free_exit("there'are a invalide param!", game);
 			j++;
 		}
 		i++;

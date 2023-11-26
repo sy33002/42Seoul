@@ -6,7 +6,7 @@
 /*   By: jihyuki2 <jihyuki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 18:30:51 by jihyuki2          #+#    #+#             */
-/*   Updated: 2023/11/26 19:02:01 by jihyuki2         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:10:43 by jihyuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <sys/stat.h>
 # include "libft/libft.h"
 # include "./mlx/mlx.h"
-# include "./src/gnl/get_next_line.h"
+# include "./get_next_line/get_next_line.h"
 
 # define X_EVENT_KEY_PRESS		2
 # define PIXEL                  63
