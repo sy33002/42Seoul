@@ -1,46 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_msg.c                                        :+:      :+:    :+:   */
+/*   pasing3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jihyuki2 <jihyuki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/19 18:31:47 by jihyuki2          #+#    #+#             */
-/*   Updated: 2023/11/25 15:33:28 by jihyuki2         ###   ########.fr       */
+/*   Created: 2023/11/28 13:14:19 by jihyuki2          #+#    #+#             */
+/*   Updated: 2023/11/28 13:53:54 by jihyuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../so_long.h"
 
-void	err_msg(char *error_msg)
-{
-	write(2, "Error\n", 6);
-	write(2, error_msg, ft_strlen(error_msg));
-	write(2, "\n", 1);
-	exit(1);
-}
-
-void	free_table(char **table)
+void	get_tmp_str_line(t_game_info *game, char **tmp_str_line)
 {
 	int	i;
 
 	i = 0;
-	while (table[i])
-		free(table[i++]);
-	free(table);
+	while (game->str_line[i])
+	{
+		tmp_str_line[i] = ft_strdup(game->str_line[i]);
+		i++;
+	}
+	tmp_str_line[i] = NULL;
 }
 
-void	err_free_exit(char *err, t_game_info *game)
+void	get_info(t_game_info *game, int	*info)
 {
-	if (err)
+	if (info != NULL)
 	{
-		write(2, "Error\n", 6);
-		write(2, err, ft_strlen(err));
-		write(2, "\n", 1);
+		info[0] = game->collec;
+		info[1] = game->exit;
 	}
-	free_table(game->str_line);
-	if (err)
-		exit(1);
-	else
-		exit(0);
 }

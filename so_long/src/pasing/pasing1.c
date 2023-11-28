@@ -6,7 +6,7 @@
 /*   By: jihyuki2 <jihyuki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 18:48:05 by jihyuki2          #+#    #+#             */
-/*   Updated: 2023/11/26 19:09:32 by jihyuki2         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:50:21 by jihyuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	valid_map(char *check_map)
 {
-	char	*check_ext;
 	int		len;
+	char	*check_ext;
 
 	len = ft_strlen(check_map) - 3;
 	check_ext = check_map + len;
@@ -78,7 +78,6 @@ void	check_param(t_game_info *game)
 	char	c;
 
 	i = 0;
-
 	while (game->str_line[i])
 	{
 		j = 0;
@@ -93,36 +92,11 @@ void	check_param(t_game_info *game)
 	}
 }
 
-
-int	check_path(t_game_info *vars, char **map, int x, int y, int *info)
-{
-	if (map[y][x] != '1')
-	{
-		if (map[y][x] == 'C')
-			info[0]--;
-		if (map[y][x] == 'E')
-			info[1]--;
-		map[y][x] = '1';
-		if (map[y][x + 1] != '1')
-			check_path(vars, map, x + 1, y, info);
-		if (map[y][x - 1] != '1')
-			check_path(vars, map, x - 1, y, info);
-		if (map[y - 1][x] != '1')
-			check_path(vars, map, x, y - 1, info);
-		if (map[y + 1][x] != '1')
-			check_path(vars, map, x, y + 1, info);
-		if (info[0] == 0 && info[1] == 0)
-			return (1);
-	}
-	return (0);
-}
-
 void	parsing(char *map, t_game_info *game)
 {
-	int chk;
-	char **tmp_str_line;
-	int i = 0;
-	int *info; 
+	int		chk;
+	char	**tmp_str_line;
+	int		*info;
 
 	valid_map(map);
 	gnl_str(map, game);
@@ -130,22 +104,13 @@ void	parsing(char *map, t_game_info *game)
 	param_count(game);
 	check_wall_consistency(game);
 	check_wall_all(game);
-
 	tmp_str_line = (char **)malloc(sizeof(char *) * (game->num_row + 1));
-	while (game->str_line[i]){
-		tmp_str_line[i] = ft_strdup(game->str_line[i]);
-		i++;
-	}
-	tmp_str_line[i] = NULL;
+	get_tmp_str_line(game, tmp_str_line);
 	info = malloc(2 * sizeof(int));
-	if (info != NULL) {
-    	info[0] = game->collec;
-    	info[1] = game->exit;
-	}
-	chk = check_path(game,tmp_str_line,game->player_x,game->player_y, info);
+	get_info(game, info);
+	chk = check_path(tmp_str_line, game->player_x, game->player_y, info);
 	free(info);
 	free_table(tmp_str_line);
 	if (chk == 0)
-		err_free_exit("this map is not valid!!!",game);
-	
+		err_free_exit("this map is not valid!!!", game);
 }

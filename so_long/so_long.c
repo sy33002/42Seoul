@@ -6,7 +6,7 @@
 /*   By: jihyuki2 <jihyuki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 18:30:31 by jihyuki2          #+#    #+#             */
-/*   Updated: 2023/11/26 19:18:28 by jihyuki2         ###   ########.fr       */
+/*   Updated: 2023/11/28 17:50:17 by jihyuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 void	game_init(t_game_info *game)
 {
-	game->str_line = NULL;
+	game->player = 0;
+	game->collec = 0;
+	game->exit = 0;
 	game->num_col = 0;
 	game->num_row = 0;
-	game->collec = 0;
-	game->player = 0;
 	game->player_x = 0;
 	game->player_y = 0;
 	game->player_move_cnt = 0;
-	game->exit = 0;
+	game->img.img_player = NULL;
+	game->img.img_collectible = NULL;
+	game->img.img_back = NULL;
+	game->img.img_exit = NULL;
+	game->img.img_wall = NULL;
 	game->mlx = NULL;
 	game->win = NULL;
-	game->img.img_player = NULL;
-	game->img.img_exit = NULL;
-	game->img.img_collectible = NULL;
-	game->img.img_floor = NULL;
-	game->img.img_wall = NULL;
+	game->str_line = NULL;
 }
 
 char	*ft_strdup2(const char *s1)
@@ -53,7 +53,6 @@ char	*ft_strdup2(const char *s1)
 	tmp[i] = '\0';
 	return (tmp);
 }
-
 
 int	key_press(int key, t_game_info *game)
 {
@@ -86,11 +85,11 @@ int	main(int ac, char **av)
 		parsing(av[1], &game);
 		game.mlx = mlx_init();
 		game.win = mlx_new_window
-			(game.mlx, game.num_col * PIXEL, game.num_row * PIXEL, "so_long");
+			(game.mlx, game.num_col * PIXEL, game.num_row * PIXEL, "[so_long]");
 		game.img = img_init(game.mlx);
-		printf("move cnt = %d\n", game.player_move_cnt);
-		mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, &key_press, &game);
-		mlx_hook(game.win, X_EVENT_KEY_EXIT, 0, &red_btn, &game);
+		ft_printf("move cnt = %d\n", game.player_move_cnt);
+		mlx_hook(game.win, EVENT_KEY_PRESS, 0, &key_press, &game);
+		mlx_hook(game.win, EVENT_KEY_EXIT, 0, &red_btn, &game);
 		mlx_loop_hook(game.mlx, &set_img, &game);
 		mlx_loop(game.mlx);
 	}

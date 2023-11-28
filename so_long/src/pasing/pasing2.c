@@ -6,7 +6,7 @@
 /*   By: jihyuki2 <jihyuki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 18:48:25 by jihyuki2          #+#    #+#             */
-/*   Updated: 2023/11/25 15:33:23 by jihyuki2         ###   ########.fr       */
+/*   Updated: 2023/11/28 20:54:03 by jihyuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,27 @@ void	check_wall_all(t_game_info *game)
 		}
 		i++;
 	}
+}
+
+int	check_path(char **map, int x, int y, int *info)
+{
+	if (map[y][x] != '1')
+	{
+		if (map[y][x] == 'C')
+			info[0]--;
+		if (map[y][x] == 'E')
+			info[1]--;
+		map[y][x] = '2';
+		if (map[y][x + 1] != '2')
+			check_path(map, x + 1, y, info);
+		if (map[y][x - 1] != '2')
+			check_path(map, x - 1, y, info);
+		if (map[y - 1][x] != '2')
+			check_path(map, x, y - 1, info);
+		if (map[y + 1][x] != '2')
+			check_path(map, x, y + 1, info);
+		if (info[0] == 0 && info[1] == 0)
+			return (1);
+	}
+	return (0);
 }
