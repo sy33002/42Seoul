@@ -94,14 +94,14 @@ int	check_path(char **map, int x, int y, int *info)
 			info[0]--;
 		if (map[y][x] == 'E')
 			info[1]--;
-		map[y][x] = '2';
-		if (map[y][x + 1] != '2')
+		map[y][x] = '1';
+		if (map[y][x + 1] != '1')
 			check_path(map, x + 1, y, info);
-		if (map[y][x - 1] != '2')
+		if (map[y][x - 1] != '1')
 			check_path(map, x - 1, y, info);
-		if (map[y - 1][x] != '2')
+		if (map[y - 1][x] != '1')
 			check_path(map, x, y - 1, info);
-		if (map[y + 1][x] != '2')
+		if (map[y + 1][x] != '1')
 			check_path(map, x, y + 1, info);
 		if (info[0] == 0 && info[1] == 0)
 			return (1);

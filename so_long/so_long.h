@@ -79,5 +79,7 @@ void		free_table(char **table);
 void		get_tmp_str_line(t_game_info *game, char **tmp_str_line);
 void		get_info(t_game_info *game, int	*info);
 t_images	img_init(void *mlx);
+int	check_path2(char **map, int x, int y, int *info);
+
 
 #endif

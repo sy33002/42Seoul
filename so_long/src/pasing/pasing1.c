@@ -95,8 +95,11 @@ void	check_param(t_game_info *game)
 void	parsing(char *map, t_game_info *game)
 {
 	int		chk;
+	int		chk2;
 	char	**tmp_str_line;
+	char	**tmp_str_line2;
 	int		*info;
+	int		*info2;
 
 	valid_map(map);
 	gnl_str(map, game);
@@ -105,12 +108,23 @@ void	parsing(char *map, t_game_info *game)
 	check_wall_consistency(game);
 	check_wall_all(game);
 	tmp_str_line = (char **)malloc(sizeof(char *) * (game->num_row + 1));
+	tmp_str_line2 = (char **)malloc(sizeof(char *) * (game->num_row + 1));
+
 	get_tmp_str_line(game, tmp_str_line);
+	get_tmp_str_line(game, tmp_str_line2);
+
 	info = malloc(2 * sizeof(int));
+	info2 = malloc(2 * sizeof(int));
+
 	get_info(game, info);
+	get_info(game, info2);
+	chk2 = check_path2(tmp_str_line2, game->player_x, game->player_y,info2);
+	printf("%d\n", chk2);
 	chk = check_path(tmp_str_line, game->player_x, game->player_y, info);
 	free(info);
 	free_table(tmp_str_line);
-	if (chk == 0)
+	free(info2);
+	free_table(tmp_str_line2);
+	if (chk == 0 || chk2 == 0)
 		err_free_exit("this map is not valid!!!", game);
 }

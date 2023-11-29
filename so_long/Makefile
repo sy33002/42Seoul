@@ -41,7 +41,7 @@ all			:	$(NAME)
 $(NAME)		:	$(OBJS)
 				make -C $(LIBFT) all
 				make -C mlx all
-				$(CC) -o $(NAME) $(OBJS) -L ./libft -lft -L ./ft_printf -L ../ -lmlx -framework OpenGL -framework AppKit
+				$(CC) -o $(NAME) $(OBJS) -L./libft -lft -L./ft_printf -L./mlx -lmlx -framework OpenGL -framework AppKit
 
 %.o			:	%.c
 		$(CC) $(FLAGS) -c $^ -I./ -o $@
