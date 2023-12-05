@@ -6,7 +6,7 @@
 /*   By: jihyuki2 <jihyuki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:14:19 by jihyuki2          #+#    #+#             */
-/*   Updated: 2023/11/28 13:53:54 by jihyuki2         ###   ########.fr       */
+/*   Updated: 2023/12/02 13:28:43 by jihyuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,6 @@ void	get_tmp_str_line(t_game_info *game, char **tmp_str_line)
 		i++;
 	}
 	tmp_str_line[i] = NULL;
-}
-
-
-void	get_info(t_game_info *game, int	*info)
-{
-	if (info != NULL)
-	{
-		info[0] = game->collec;
-		info[1] = game->exit;
-	}
 }
 
 int	check_path2(char **map, int x, int y, int *info)
@@ -56,4 +46,38 @@ int	check_path2(char **map, int x, int y, int *info)
 	if (info[0] == 0)
 		return (1);
 	return (0);
+}
+
+void	get_info_check_path(char **map, int x, int y, t_game_info *game)
+{
+	int	*info;
+	int	chk;
+
+	info = malloc(2 * sizeof(int));
+	if (info != NULL)
+	{
+		info[0] = game->collec;
+		info[1] = game->exit;
+	}
+	chk = check_path(map, x, y, info);
+	free(info);
+	if (chk == 0)
+		err_free_exit("this map is not valid!!!", game);
+}
+
+void	get_info_check_path2(char **map, int x, int y, t_game_info *game)
+{
+	int	*info;
+	int	chk;
+
+	info = malloc(2 * sizeof(int));
+	if (info != NULL)
+	{
+		info[0] = game->collec;
+		info[1] = game->exit;
+	}
+	chk = check_path2(map, x, y, info);
+	free(info);
+	if (chk == 0)
+		err_free_exit("this map is not valid!!!", game);
 }

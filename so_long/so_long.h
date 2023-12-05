@@ -6,7 +6,7 @@
 /*   By: jihyuki2 <jihyuki2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 18:30:51 by jihyuki2          #+#    #+#             */
-/*   Updated: 2023/11/28 17:52:40 by jihyuki2         ###   ########.fr       */
+/*   Updated: 2023/12/02 14:22:00 by jihyuki2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define EVENT_KEY_PRESS		2
 # define KEY_S			        1
 # define KEY_D			        2
-# define EVENT_KEY_EXIT		17
+# define EVENT_KEY_EXIT			17
 
 typedef struct s_image
 {
@@ -77,9 +77,9 @@ char		*ft_strdup2(const char *s1);
 int			check_path(char **map, int x, int y, int *info);
 void		free_table(char **table);
 void		get_tmp_str_line(t_game_info *game, char **tmp_str_line);
-void		get_info(t_game_info *game, int	*info);
+int			check_path2(char **map, int x, int y, int *info);
+void		get_info_check_path(char **map, int x, int y, t_game_info *game);
+void		get_info_check_path2(char **map, int x, int y, t_game_info *game);
 t_images	img_init(void *mlx);
-int	check_path2(char **map, int x, int y, int *info);
-
 
 #endif
